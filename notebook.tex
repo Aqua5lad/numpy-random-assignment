@@ -1,0 +1,1619 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{numpy-random}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{The numpy.random package}\label{the-numpy.random-package}
+
+    \subsubsection{About Numpy.random}\label{about-numpy.random}
+
+The numpy.random package is a sub-package of the Numpy
+library\href{http://www.numpy.org/}{1} for the Python programming
+language. Numpy is used for dealing with multi-dimensional arrays of
+values and matrix operations in data analysis. While it's a powerful and
+widely used package, users seldom interact directly with it - it's
+typically accessed via one of the sub-packages such as numpy.random.
+
+    \subsubsection{It's Purpose}\label{its-purpose}
+
+The purpose of numpy.random is to provide users with a selection of
+methods by which pseudo random numbers can be generated for use in
+various applications. Perhaps the classic application is in the creation
+of sampling plans.
+
+While its not currently possible for a computer to create truly random
+values, pseudo random numbers (derived from any method using
+computational algorithms) offer a useful simulation of actual random
+values. In theory, a higher degree of apparent randomness may
+characterise numbers generated from methods using electromagnetic
+atmospheric noise as a source input.
+\href{https://en.wikipedia.org/wiki/Random_number_generation}{2} With
+the advent of `quantum computing' perhaps it may finally become possible
+to generate truly random values.
+
+    \subsubsection{Who needs random
+numbers?}\label{who-needs-random-numbers}
+
+Aside from their frequent use in sampling and simulations, one
+real-world application for pseudo random numbers which I have personally
+encountered is in the online gaming industry. In this case, a stream of
+pseudo random numbers is accessed by connected gaming terminals in
+bookmakers shops, pubs etc to produce results in so-called ``games of
+chance'', where the user's skills have no influence on the result. As a
+mission critical component in the network, the random number generator
+(RNG) runs 24x7 for 365 days a year, and any interruption of service is
+flagged by loud alarms in the HQ where the operations team quickly work
+to restore service!
+
+    \subsubsection{Sampling Methods}\label{sampling-methods}
+
+Sampling Methods can be classified into one of two
+categories:\href{https://onlinecourses.science.psu.edu/stat100/node/18/}{3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Probability Sampling: The sample has a known probability of being
+  selected. All of the distributions illustrated here are examples of
+  probability sampling.These techniques are more likely to yield a
+  sample which is representative of the whole population, to within a
+  calculated margin of error.
+\item
+  Non-probability Sampling: The sample does not have a known probability
+  of being selected. In contrast with probability sampling, a
+  non-probability sample is not a product of a randomized selection
+  processes. Subjects in a non-probability sample are usually selected
+  on the basis of their accessibility or by the personal judgment of the
+  researcher. \href{https://explorable.com/non-probability-sampling}{4}
+  Such techniques are unlikely to yield a sample which is representative
+  of the whole population.
+\end{enumerate}
+
+    \subsubsection{Use of the Simple Random Data
+functions}\label{use-of-the-simple-random-data-functions}
+
+The ``Simple random data''
+functions\href{https://docs.scipy.org/doc/numpy-1.14.1/reference/routines.random.html\#}{5}
+in numpy.random provide a range of methods for creating random values in
+a variety of arrays, formats and structures, depending on the specific
+needs of the user. This is a good starting point for devising a simple
+sampling plan.
+
+    \subsubsection{Using numpy.random.rand}\label{using-numpy.random.rand}
+
+Simple random data functions in numpy.random begin with
+numpy.random.rand
+\href{https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.random.rand.html\#numpy.random.rand}{6},
+which allows you to create an array of a given shape and populate it
+with random floating values of a uniform distribution, from 0 to
+0.99999999. For example, here's an array of 3 sets of sample values, of
+4 rows and 3 columns each, generated by np.random.rand
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} array([[[0.81893648, 0.35894255, 0.69974417],
+                [0.2048686 , 0.10093235, 0.46919491],
+                [0.1994188 , 0.5658538 , 0.1875186 ],
+                [0.92495191, 0.79688265, 0.91042378]],
+        
+               [[0.76145577, 0.95218081, 0.99571217],
+                [0.12313656, 0.93317708, 0.43235349],
+                [0.76512726, 0.89835127, 0.22475713],
+                [0.25918935, 0.37876375, 0.45609549]],
+        
+               [[0.9402218 , 0.87519641, 0.84522271],
+                [0.08107309, 0.37347316, 0.50104148],
+                [0.24723632, 0.49645582, 0.13205144],
+                [0.66643175, 0.56962985, 0.89748852]]])
+\end{Verbatim}
+            
+    Even in such small sample sizes, each of these values is almost as
+likely to appear in the array as any other, as it's a uniform
+distribution.
+
+    \subsubsection{Using numpy.random.int}\label{using-numpy.random.int}
+
+    Another simple random data function is numpy.random.int
+\href{https://docs.scipy.org/doc/numpy-1.14.1/reference/generated/numpy.random.randint.html\#numpy.random.randint}{7},
+which can create an array of integers between defined low \& high
+limits, from the ``discrete uniform'' distribution in the closed
+interval {[}low, high{]}. For example, to create an array of 10
+integers, greater than 0 and less than or equal to 100 :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} array([57,  2, 11, 72, 59, 26, 83, 54, 38, 82])
+\end{Verbatim}
+            
+    \subsubsection{Permutations}\label{permutations}
+
+The ``Permutation'' functions offer a range of methods for randomising
+the arrangement (or order) of a defined sequence of values. This could
+be a good starting point for a programmer creating a music shuffle
+function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    Here is an example of a permutation function using the shuffle command,
+starting with an initial array:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{arr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14])
+\end{Verbatim}
+            
+    Here it is, randomly shuffled:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{arr}\PY{p}{)}
+         \PY{n}{arr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} array([11,  4,  7,  1,  0,  8, 10, 13,  6, 14,  3, 12,  9,  5,  2])
+\end{Verbatim}
+            
+    Incidently, how many permutations are possible in this example? How many
+unique ways could you arrange 15 books on a shelf? The answer is
+15\emph{14}13\emph{12}11\emph{10}9\emph{8}7\emph{6}5\emph{4}3\emph{2}1
+or "factorial 15", expressed as 15! - and the number of permutations is
+1.3076744e+12 .... or 1,307,674,368,000
+
+    \subsection{About Probability
+Distributions}\label{about-probability-distributions}
+
+    A~probability distribution~is a mathematical function that provides the
+probabilities of occurrence of different possible outcomes in
+an~experiment.\href{https://en.wikipedia.org/wiki/Probability_distribution\#Applications}{8}
+The concept of the probability distribution and the random variables
+which they describe underlies the mathematical discipline of probability
+theory, and the science of statistics. There is spread or variability in
+almost any value that can be measured in a population (e.g. height of
+people, durability of a metal, sales growth, traffic flow, etc.).
+
+Examples of Probability distributions include the following:
+
+    \subsubsection{Visualising
+Distributions}\label{visualising-distributions}
+
+To illustrate the distribution of random values generated by the
+np.random.rand function, we can use it to generate a sample of values
+and then plot them using matplotlib:
+
+    \subsubsection{Uniform}\label{uniform}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    Generate 30,000 random values of between 0 and 0.99999999
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{30000}\PY{p}{)}
+        \PY{n}{x}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} array([0.34202469, 0.84396772, 0.1611977 , {\ldots}, 0.30696916, 0.72532294,
+               0.82767338])
+\end{Verbatim}
+            
+    Plot the distribution of these values in a histogram
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} (array([2948., 2998., 2955., 3063., 2998., 2940., 3051., 3101., 2879.,
+                3067.]),
+         array([6.15054398e-05, 1.00051879e-01, 2.00042253e-01, 3.00032627e-01,
+                4.00023000e-01, 5.00013374e-01, 6.00003748e-01, 6.99994121e-01,
+                7.99984495e-01, 8.99974869e-01, 9.99965242e-01]),
+         <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    That's what a randomly generated, essentially uniform distribution looks
+like. It's uniform insofaras every value in the range defined had an
+equal chance of being picked. We see approx 3,000 appearances of each
+value.
+
+Another function which generates a uniform distribution
+isnp.random.uniform :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{s}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} array([-9.42966673, -9.43826041, -9.15772765, -9.02574039, -9.45295171,
+                -9.13661873, -9.20970295, -9.08172512, -9.96541557, -9.87461046,
+                -9.26951045, -9.78469684, -9.85440231, -9.08656857, -9.87382243,
+                -9.83658855, -9.49320976, -9.56933105, -9.92882012, -9.10878303,
+                -9.37818345, -9.26286676, -9.56605076, -9.57175948, -9.03579986,
+                -9.56304116, -9.62518655, -9.49122994, -9.75068558, -9.13240214,
+                -9.19873253, -9.07058949, -9.92578653, -9.89969589, -9.81898972,
+                -9.91428485, -9.38656149, -9.23385309, -9.82110294, -9.69510141,
+                -9.1176082 , -9.21323478, -9.09188739, -9.23245698, -9.76992772,
+                -9.60325804, -9.1819301 , -9.86632107, -9.95424725, -9.15422782,
+                -9.31136197, -9.78764175, -9.85983893, -9.24310035, -9.09782721,
+                -9.56433275, -9.258888  , -9.915299  , -9.3963184 , -9.11897165,
+                -9.92470502, -9.28982454, -9.47440205, -9.0750263 , -9.83972934,
+                -9.85013245, -9.32456063, -9.83342988, -9.02059918, -9.87814024,
+                -9.26739907, -9.47300001, -9.09665196, -9.51381173, -9.00956919,
+                -9.73405016, -9.24045157, -9.43650531, -9.58332736, -9.24741101,
+                -9.00946425, -9.25445408, -9.58370999, -9.5978992 , -9.07377975,
+                -9.83406521, -9.99815617, -9.33983035, -9.15933814, -9.24325862,
+                -9.48953442, -9.54631307, -9.08831483, -9.61774408, -9.55885809,
+                -9.6364229 , -9.57442875, -9.37428849, -9.5438914 , -9.80666539])
+\end{Verbatim}
+            
+    the np.random.uniform function seems to show a quite different looking
+distribution for this 100 sample, but the larger the sample size the
+more uniform it looks.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} (array([ 9., 14.,  5.,  5., 13.,  9.,  7., 14., 10., 14.]),
+          array([-9.99815617, -9.89928698, -9.80041779, -9.70154859, -9.6026794 ,
+                 -9.50381021, -9.40494102, -9.30607182, -9.20720263, -9.10833344,
+                 -9.00946425]),
+          <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Normal}\label{normal}
+
+    A Normal (or Gaussian) distribution is related to real-valued quantities
+that grow linearly (e.g. errors, offsets). Its the most common
+continuous distribution. We can use the 'numpy.random.normal' function
+which generates a normal distribution looking more like the classic
+'bell curve'.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} (array([  5.,  32.,  86., 190., 242., 242., 132.,  54.,  14.,   3.]),
+         array([-0.32178286, -0.25519221, -0.18860157, -0.12201092, -0.05542028,
+                 0.01117037,  0.07776101,  0.14435166,  0.2109423 ,  0.27753295,
+                 0.34412359]),
+         <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This Normal distribution shows observations clustered around the Mean
+value of zero. The chances of values close to zero being picked are
+greater than for those at the extremities of the distribution. Typically
+95\% of all observations in a Normal distribution fall within +/- 2
+Standard Deviations from the Mean.
+
+    Notice that its the 1st digit in np.random.normal (0,0.1,10000) which
+defines the MEAN in this distribution - in this case 0. You can make it
+any value you choose. Equally, the 2nd digit defines the intervals in
+the range.
+
+    \subsubsection{SUNDAY 11.20am - Now lets take a look at Random Number
+Generation, using
+numpy.random.RandomState}\label{sunday-11.20am---now-lets-take-a-look-at-random-number-generation-using-numpy.random.randomstate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{RandomState}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+         \PY{n}{z}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} <mtrand.RandomState at 0x11a07cd80>
+\end{Verbatim}
+            
+    \subsection{Bayes Theorem - a
+Simulation}\label{bayes-theorem---a-simulation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mf}{0.01}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} experiment runs once(1) with 1\PYZpc{} prob of a positive result}
+         \PY{c+c1}{\PYZsh{} expect result will be zero 99 times out of 100}
+         
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} now it runs 1,000 times,how often is the result positive?}
+         \PY{c+c1}{\PYZsh{} expect results to cluster around a mean of 10}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+12
+
+    \end{Verbatim}
+
+    \subsubsection{coding the simulation}\label{coding-the-simulation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Helper function, returns True with probability P, False otherwise.\PYZbs{}n\PYZdq{},}
+         \PY{k}{def} \PY{n+nf}{true\PYZus{}with\PYZus{}prob\PYZus{}p}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{k+kc}{True} \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1} \PY{k}{else} \PY{k+kc}{False}
+             
+             \PY{c+c1}{\PYZsh{} Simulate the selection of a random person from the population.}
+             \PY{c+c1}{\PYZsh{} Return True if they are a drug user, False otherwise.}
+             \PY{c+c1}{\PYZsh{} True is returned with probability 0.005.}
+             
+         \PY{k}{def} \PY{n+nf}{select\PYZus{}random\PYZus{}person}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{true\PYZus{}with\PYZus{}prob\PYZus{}p}\PY{p}{(}\PY{l+m+mf}{0.005}\PY{p}{)}\PYZbs{}
+             
+             \PY{c+c1}{\PYZsh{} Simulate the testing of a person from the population.}
+             \PY{c+c1}{\PYZsh{} Return True if they test positive, False otherwise.}
+             \PY{c+c1}{\PYZsh{} Non\PYZhy{}users test positive with probability 0.01.}
+             \PY{c+c1}{\PYZsh{} Users test positive with probability 0.99.}
+         \PY{k}{def} \PY{n+nf}{test\PYZus{}person}\PY{p}{(}\PY{n}{user}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{user}\PY{p}{:}\PYZbs{}
+                 \PY{k}{return} \PY{n}{true\PYZus{}with\PYZus{}prob\PYZus{}p}\PY{p}{(}\PY{l+m+mf}{0.99}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{true\PYZus{}with\PYZus{}prob\PYZus{}p}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Run an experiment \PYZhy{} take a random person from the population}
+             \PY{c+c1}{\PYZsh{} and test whether or not they are positive.}
+         \PY{k}{def} \PY{n+nf}{run\PYZus{}experiment}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{user} \PY{o}{=} \PY{n}{select\PYZus{}random\PYZus{}person}\PY{p}{(}\PY{p}{)}
+             \PY{n}{test} \PY{o}{=} \PY{n}{test\PYZus{}person}\PY{p}{(}\PY{n}{user}\PY{p}{)}
+             \PY{k}{return} \PY{p}{(}\PY{n}{user}\PY{p}{,} \PY{n}{test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Run the experiment 10,000 times.}
+         \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{run\PYZus{}experiment}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} Count the number of users who tested positive.}
+         \PY{n}{user\PYZus{}and\PYZus{}positive} \PY{o}{=} \PY{p}{[}\PY{k+kc}{True} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{y} \PY{k}{if} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True} \PY{o+ow}{and} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Count the number of non\PYZhy{}users who tested positive.}
+         \PY{n}{nonuser\PYZus{}and\PYZus{}positive} \PY{o}{=} \PY{p}{[}\PY{k+kc}{True}  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{y} \PY{k}{if} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False} \PY{o+ow}{and} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{user\PYZus{}and\PYZus{}positive}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 41
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{nonuser\PYZus{}and\PYZus{}positive}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} 92
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{user\PYZus{}and\PYZus{}positive}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{nonuser\PYZus{}and\PYZus{}positive}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Users}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Non\PYZhy{}Users}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{People who tested positive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} Text(0.5,1,'People who tested positive')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Analysis}\label{analysis}
+
+\subsubsection{\texorpdfstring{P(User\Positive) = P(Positive\User) *
+P(user)}{P(User) = P(Positive) * P(user)}}\label{puser-ppositive-puser}
+
+\subsubsection{all / P(Positive)}\label{all-ppositive}
+
+\subsubsection{\texorpdfstring{also = P(Positive\User) *
+P(user)}{also = P(Positive) * P(user)}}\label{also-ppositive-puser}
+
+\subsubsection{\texorpdfstring{all / P(Positive\User) * P(user) +
+P(Positive\NonUser) *
+P(NonUser)}{all / P(Positive) * P(user) + P(Positive) * P(NonUser)}}\label{all-ppositive-puser-ppositive-pnonuser}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Probability that you\PYZsq{}re a user.}
+         \PY{n}{p\PYZus{}user} \PY{o}{=} \PY{l+m+mf}{0.005}
+         
+         \PY{c+c1}{\PYZsh{} Probability that you\PYZsq{}re a non\PYZhy{}user.}
+         \PY{n}{p\PYZus{}nonuser} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{p\PYZus{}user}
+         
+         \PY{c+c1}{\PYZsh{} Probability that a user tests positive.}
+         \PY{n}{p\PYZus{}positive\PYZus{}user} \PY{o}{=} \PY{l+m+mf}{0.99}
+         
+         \PY{c+c1}{\PYZsh{} Probability that a non\PYZhy{}user tests negative.}
+         \PY{n}{p\PYZus{}positive\PYZus{}nonuser} \PY{o}{=} \PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.99}
+         
+         \PY{c+c1}{\PYZsh{} Probability that you test positive.}
+         \PY{n}{p\PYZus{}positive} \PY{o}{=} \PY{n}{p\PYZus{}positive\PYZus{}user} \PY{o}{*} \PY{n}{p\PYZus{}user} \PY{o}{+} \PY{n}{p\PYZus{}positive\PYZus{}nonuser} \PY{o}{*} \PY{n}{p\PYZus{}nonuser}
+         
+         \PY{c+c1}{\PYZsh{} Bayes\PYZsq{} theorem.}
+         \PY{n}{top\PYZus{}line} \PY{o}{=} \PY{n}{p\PYZus{}positive\PYZus{}user} \PY{o}{*} \PY{n}{p\PYZus{}user}
+         \PY{n}{bottom\PYZus{}line} \PY{o}{=} \PY{n}{p\PYZus{}positive}
+         \PY{n}{p\PYZus{}user\PYZus{}positive} \PY{o}{=} \PY{n}{top\PYZus{}line} \PY{o}{/} \PY{n}{bottom\PYZus{}line}
+         
+         \PY{c+c1}{\PYZsh{} Show result.}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{p\PYZus{}user\PYZus{}positive}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.33221476510067094
+
+    \end{Verbatim}
+
+    \subsection{Exploring PANDAS}\label{exploring-pandas}
+
+    \paragraph{About the Iris data set from UC Irvine's machine learning
+repository}\label{about-the-iris-data-set-from-uc-irvines-machine-learning-repository}
+
+(https://archive.ics.uci.edu/ml/datasets/iris)
+
+    \subsection{Loading Data}\label{loading-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{c+c1}{\PYZsh{} Load the iris data set from a URL.}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://raw.githubusercontent.com/uiuc\PYZhy{}cse/data\PYZhy{}fa14/gh\PYZhy{}pages/data/iris.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} df means \PYZdq{}data frame\PYZdq{} \PYZhy{} a data structure in Pandas, its a 2 dimensional array. In this case}
+         \PY{c+c1}{\PYZsh{} it has 4 columns of floating\PYZhy{}point values, 1 column of \PYZsq{}strings\PYZsq{}(ie. non numeric classes) and 1}
+         \PY{c+c1}{\PYZsh{} \PYZdq{}index\PYZdq{} column to reference each row.}
+\end{Verbatim}
+
+
+    \subsubsection{this imports a basic flat file (csv) with headers, then
+formats it nicely, as
+follows:}\label{this-imports-a-basic-flat-file-csv-with-headers-then-formats-it-nicely-as-follows}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:}      sepal\_length  sepal\_width  petal\_length  petal\_width    species
+         0             5.1          3.5           1.4          0.2     setosa
+         1             4.9          3.0           1.4          0.2     setosa
+         2             4.7          3.2           1.3          0.2     setosa
+         3             4.6          3.1           1.5          0.2     setosa
+         4             5.0          3.6           1.4          0.2     setosa
+         5             5.4          3.9           1.7          0.4     setosa
+         6             4.6          3.4           1.4          0.3     setosa
+         7             5.0          3.4           1.5          0.2     setosa
+         8             4.4          2.9           1.4          0.2     setosa
+         9             4.9          3.1           1.5          0.1     setosa
+         10            5.4          3.7           1.5          0.2     setosa
+         11            4.8          3.4           1.6          0.2     setosa
+         12            4.8          3.0           1.4          0.1     setosa
+         13            4.3          3.0           1.1          0.1     setosa
+         14            5.8          4.0           1.2          0.2     setosa
+         15            5.7          4.4           1.5          0.4     setosa
+         16            5.4          3.9           1.3          0.4     setosa
+         17            5.1          3.5           1.4          0.3     setosa
+         18            5.7          3.8           1.7          0.3     setosa
+         19            5.1          3.8           1.5          0.3     setosa
+         20            5.4          3.4           1.7          0.2     setosa
+         21            5.1          3.7           1.5          0.4     setosa
+         22            4.6          3.6           1.0          0.2     setosa
+         23            5.1          3.3           1.7          0.5     setosa
+         24            4.8          3.4           1.9          0.2     setosa
+         25            5.0          3.0           1.6          0.2     setosa
+         26            5.0          3.4           1.6          0.4     setosa
+         27            5.2          3.5           1.5          0.2     setosa
+         28            5.2          3.4           1.4          0.2     setosa
+         29            4.7          3.2           1.6          0.2     setosa
+         ..            {\ldots}          {\ldots}           {\ldots}          {\ldots}        {\ldots}
+         120           6.9          3.2           5.7          2.3  virginica
+         121           5.6          2.8           4.9          2.0  virginica
+         122           7.7          2.8           6.7          2.0  virginica
+         123           6.3          2.7           4.9          1.8  virginica
+         124           6.7          3.3           5.7          2.1  virginica
+         125           7.2          3.2           6.0          1.8  virginica
+         126           6.2          2.8           4.8          1.8  virginica
+         127           6.1          3.0           4.9          1.8  virginica
+         128           6.4          2.8           5.6          2.1  virginica
+         129           7.2          3.0           5.8          1.6  virginica
+         130           7.4          2.8           6.1          1.9  virginica
+         131           7.9          3.8           6.4          2.0  virginica
+         132           6.4          2.8           5.6          2.2  virginica
+         133           6.3          2.8           5.1          1.5  virginica
+         134           6.1          2.6           5.6          1.4  virginica
+         135           7.7          3.0           6.1          2.3  virginica
+         136           6.3          3.4           5.6          2.4  virginica
+         137           6.4          3.1           5.5          1.8  virginica
+         138           6.0          3.0           4.8          1.8  virginica
+         139           6.9          3.1           5.4          2.1  virginica
+         140           6.7          3.1           5.6          2.4  virginica
+         141           6.9          3.1           5.1          2.3  virginica
+         142           5.8          2.7           5.1          1.9  virginica
+         143           6.8          3.2           5.9          2.3  virginica
+         144           6.7          3.3           5.7          2.5  virginica
+         145           6.7          3.0           5.2          2.3  virginica
+         146           6.3          2.5           5.0          1.9  virginica
+         147           6.5          3.0           5.2          2.0  virginica
+         148           6.2          3.4           5.4          2.3  virginica
+         149           5.9          3.0           5.1          1.8  virginica
+         
+         [150 rows x 5 columns]
+\end{Verbatim}
+            
+    \paragraph{Pandas 'looks at' the values in the rows \& column first, to
+figure out how best to format the table - eg. it detects floating-point
+values, strings etc. It also looks at the first row to see if it appears
+to be headers, rather than
+values.}\label{pandas-looks-at-the-values-in-the-rows-column-first-to-figure-out-how-best-to-format-the-table---eg.-it-detects-floating-point-values-strings-etc.-it-also-looks-at-the-first-row-to-see-if-it-appears-to-be-headers-rather-than-values.}
+
+In the above table, it added row labels (1-149) and although they look
+like an ordered index, they are simply labels.
+
+In this respect, Pandas is more sophisticated than numpy - which can
+only handle a dataframe of homogeneous types - eg. every cell is a
+floating-point value, or a string, etc. It cannot detect different data
+types.
+
+    \subsection{To make sub-selections from a dataframe in
+Pandas}\label{to-make-sub-selections-from-a-dataframe-in-pandas}
+
+\paragraph{columns and/or rows may have labels, or not. You can slice \&
+name them with
+Pandas}\label{columns-andor-rows-may-have-labels-or-not.-you-can-slice-name-them-with-pandas}
+
+    \subsection{Selecting Rows and
+Columns}\label{selecting-rows-and-columns}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{petal\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}      petal\_length    species
+         0             1.4     setosa
+         1             1.4     setosa
+         2             1.3     setosa
+         3             1.5     setosa
+         4             1.4     setosa
+         5             1.7     setosa
+         6             1.4     setosa
+         7             1.5     setosa
+         8             1.4     setosa
+         9             1.5     setosa
+         10            1.5     setosa
+         11            1.6     setosa
+         12            1.4     setosa
+         13            1.1     setosa
+         14            1.2     setosa
+         15            1.5     setosa
+         16            1.3     setosa
+         17            1.4     setosa
+         18            1.7     setosa
+         19            1.5     setosa
+         20            1.7     setosa
+         21            1.5     setosa
+         22            1.0     setosa
+         23            1.7     setosa
+         24            1.9     setosa
+         25            1.6     setosa
+         26            1.6     setosa
+         27            1.5     setosa
+         28            1.4     setosa
+         29            1.6     setosa
+         ..            {\ldots}        {\ldots}
+         120           5.7  virginica
+         121           4.9  virginica
+         122           6.7  virginica
+         123           4.9  virginica
+         124           5.7  virginica
+         125           6.0  virginica
+         126           4.8  virginica
+         127           4.9  virginica
+         128           5.6  virginica
+         129           5.8  virginica
+         130           6.1  virginica
+         131           6.4  virginica
+         132           5.6  virginica
+         133           5.1  virginica
+         134           5.6  virginica
+         135           6.1  virginica
+         136           5.6  virginica
+         137           5.5  virginica
+         138           4.8  virginica
+         139           5.4  virginica
+         140           5.6  virginica
+         141           5.1  virginica
+         142           5.1  virginica
+         143           5.9  virginica
+         144           5.7  virginica
+         145           5.2  virginica
+         146           5.0  virginica
+         147           5.2  virginica
+         148           5.4  virginica
+         149           5.1  virginica
+         
+         [150 rows x 2 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{df}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:}    sepal\_length  sepal\_width  petal\_length  petal\_width species
+         2           4.7          3.2           1.3          0.2  setosa
+         3           4.6          3.1           1.5          0.2  setosa
+         4           5.0          3.6           1.4          0.2  setosa
+         5           5.4          3.9           1.7          0.4  setosa
+\end{Verbatim}
+            
+    just told it "give me rows 2 up to, but not including, 6".
+
+You can also combine both types of command in one call:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{petal\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:}    petal\_length species
+         2           1.3  setosa
+         3           1.5  setosa
+         4           1.4  setosa
+         5           1.7  setosa
+\end{Verbatim}
+            
+    \section{However !}\label{however}
+
+\subsubsection{this notation approach is not recommended - can cause
+issues. The double {[}{[} {]}{]} is a clue that you're taking chances
+....}\label{this-notation-approach-is-not-recommended---can-cause-issues.-the-double-is-a-clue-that-youre-taking-chances-....}
+
+    \subsubsection{As safer approach to use loc and
+iloc}\label{as-safer-approach-to-use-loc-and-iloc}
+
+    \subsubsection{loc uses labels, iloc uses position
+....}\label{loc-uses-labels-iloc-uses-position-....}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:}    sepal\_length  sepal\_width  petal\_length  petal\_width species
+         2           4.7          3.2           1.3          0.2  setosa
+         3           4.6          3.1           1.5          0.2  setosa
+         4           5.0          3.6           1.4          0.2  setosa
+         5           5.4          3.9           1.7          0.4  setosa
+         6           4.6          3.4           1.4          0.3  setosa
+\end{Verbatim}
+            
+    \subsubsection{it returned rows 2 to 6 because it looks at the labels -
+and those row numbers are labels, rather than values. If we had used
+iloc there, it would have excluded row
+6.}\label{it-returned-rows-2-to-6-because-it-looks-at-the-labels---and-those-row-numbers-are-labels-rather-than-values.-if-we-had-used-iloc-there-it-would-have-excluded-row-6.}
+
+\subsubsection{Now - to get a column
+back:}\label{now---to-get-a-column-back}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 0         setosa
+         1         setosa
+         2         setosa
+         3         setosa
+         4         setosa
+         5         setosa
+         6         setosa
+         7         setosa
+         8         setosa
+         9         setosa
+         10        setosa
+         11        setosa
+         12        setosa
+         13        setosa
+         14        setosa
+         15        setosa
+         16        setosa
+         17        setosa
+         18        setosa
+         19        setosa
+         20        setosa
+         21        setosa
+         22        setosa
+         23        setosa
+         24        setosa
+         25        setosa
+         26        setosa
+         27        setosa
+         28        setosa
+         29        setosa
+                  {\ldots}    
+         120    virginica
+         121    virginica
+         122    virginica
+         123    virginica
+         124    virginica
+         125    virginica
+         126    virginica
+         127    virginica
+         128    virginica
+         129    virginica
+         130    virginica
+         131    virginica
+         132    virginica
+         133    virginica
+         134    virginica
+         135    virginica
+         136    virginica
+         137    virginica
+         138    virginica
+         139    virginica
+         140    virginica
+         141    virginica
+         142    virginica
+         143    virginica
+         144    virginica
+         145    virginica
+         146    virginica
+         147    virginica
+         148    virginica
+         149    virginica
+         Name: species, Length: 150, dtype: object
+\end{Verbatim}
+            
+    \subsubsection{in that command, the colon meant "all" - so, all rows,
+and just the 'species' column. Now try this approach
+....}\label{in-that-command-the-colon-meant-all---so-all-rows-and-just-the-species-column.-now-try-this-approach-....}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sepal\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:}    sepal\_length species
+         2           4.7  setosa
+         3           4.6  setosa
+         4           5.0  setosa
+         5           5.4  setosa
+         6           4.6  setosa
+\end{Verbatim}
+            
+    \subsubsection{so "give me this list of column labels, and this list of
+row
+labels"}\label{so-give-me-this-list-of-column-labels-and-this-list-of-row-labels}
+
+\subsubsection{note that the original row labels persist (eg. first one
+is '2') - be aware of this effect when using loc. Whereas ... iloc
+returns
+position:}\label{note-that-the-original-row-labels-persist-eg.-first-one-is-2---be-aware-of-this-effect-when-using-loc.-whereas-...-iloc-returns-position}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} sepal\_length       4.7
+         sepal\_width        3.2
+         petal\_length       1.3
+         petal\_width        0.2
+         species         setosa
+         Name: 2, dtype: object
+\end{Verbatim}
+            
+    \paragraph{that returned the values from the row position 2 (remember, 0
+is the
+first)}\label{that-returned-the-values-from-the-row-position-2-remember-0-is-the-first}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} 2    3.2
+         3    3.1
+         Name: sepal\_width, dtype: float64
+\end{Verbatim}
+            
+    \subsubsection{that returned the values from rows in position 2 to 4,
+and column position 1 (which is the 2nd
+column)}\label{that-returned-the-values-from-rows-in-position-2-to-4-and-column-position-1-which-is-the-2nd-column}
+
+Now, the 'at' command can be used to return a sibgle value from an
+array:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{df}\PY{o}{.}\PY{n}{at}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 'setosa'
+\end{Verbatim}
+            
+    \subsubsection{\texorpdfstring{... \emph{so, loc uses Labels, iloc uses
+Positions}
+!}{... so, loc uses Labels, iloc uses Positions !}}\label{so-loc-uses-labels-iloc-uses-positions}
+
+    \subsection{Boolean Selects:}\label{boolean-selects}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{setosa}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} 0       True
+         1       True
+         2       True
+         3       True
+         4       True
+         5       True
+         6       True
+         7       True
+         8       True
+         9       True
+         10      True
+         11      True
+         12      True
+         13      True
+         14      True
+         15      True
+         16      True
+         17      True
+         18      True
+         19      True
+         20      True
+         21      True
+         22      True
+         23      True
+         24      True
+         25      True
+         26      True
+         27      True
+         28      True
+         29      True
+                {\ldots}  
+         120    False
+         121    False
+         122    False
+         123    False
+         124    False
+         125    False
+         126    False
+         127    False
+         128    False
+         129    False
+         130    False
+         131    False
+         132    False
+         133    False
+         134    False
+         135    False
+         136    False
+         137    False
+         138    False
+         139    False
+         140    False
+         141    False
+         142    False
+         143    False
+         144    False
+         145    False
+         146    False
+         147    False
+         148    False
+         149    False
+         Name: species, Length: 150, dtype: bool
+\end{Verbatim}
+            
+    \subsubsection{== compared the value in "species" to the string "setosa"
+- if its setosa, then its
+TRUE.}\label{compared-the-value-in-species-to-the-string-setosa---if-its-setosa-then-its-true.}
+
+    Now, to return just the rows with the setosa string:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{setosa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:}     sepal\_length  sepal\_width  petal\_length  petal\_width species
+         0            5.1          3.5           1.4          0.2  setosa
+         1            4.9          3.0           1.4          0.2  setosa
+         2            4.7          3.2           1.3          0.2  setosa
+         3            4.6          3.1           1.5          0.2  setosa
+         4            5.0          3.6           1.4          0.2  setosa
+         5            5.4          3.9           1.7          0.4  setosa
+         6            4.6          3.4           1.4          0.3  setosa
+         7            5.0          3.4           1.5          0.2  setosa
+         8            4.4          2.9           1.4          0.2  setosa
+         9            4.9          3.1           1.5          0.1  setosa
+         10           5.4          3.7           1.5          0.2  setosa
+         11           4.8          3.4           1.6          0.2  setosa
+         12           4.8          3.0           1.4          0.1  setosa
+         13           4.3          3.0           1.1          0.1  setosa
+         14           5.8          4.0           1.2          0.2  setosa
+         15           5.7          4.4           1.5          0.4  setosa
+         16           5.4          3.9           1.3          0.4  setosa
+         17           5.1          3.5           1.4          0.3  setosa
+         18           5.7          3.8           1.7          0.3  setosa
+         19           5.1          3.8           1.5          0.3  setosa
+         20           5.4          3.4           1.7          0.2  setosa
+         21           5.1          3.7           1.5          0.4  setosa
+         22           4.6          3.6           1.0          0.2  setosa
+         23           5.1          3.3           1.7          0.5  setosa
+         24           4.8          3.4           1.9          0.2  setosa
+         25           5.0          3.0           1.6          0.2  setosa
+         26           5.0          3.4           1.6          0.4  setosa
+         27           5.2          3.5           1.5          0.2  setosa
+         28           5.2          3.4           1.4          0.2  setosa
+         29           4.7          3.2           1.6          0.2  setosa
+         30           4.8          3.1           1.6          0.2  setosa
+         31           5.4          3.4           1.5          0.4  setosa
+         32           5.2          4.1           1.5          0.1  setosa
+         33           5.5          4.2           1.4          0.2  setosa
+         34           4.9          3.1           1.5          0.1  setosa
+         35           5.0          3.2           1.2          0.2  setosa
+         36           5.5          3.5           1.3          0.2  setosa
+         37           4.9          3.1           1.5          0.1  setosa
+         38           4.4          3.0           1.3          0.2  setosa
+         39           5.1          3.4           1.5          0.2  setosa
+         40           5.0          3.5           1.3          0.3  setosa
+         41           4.5          2.3           1.3          0.3  setosa
+         42           4.4          3.2           1.3          0.2  setosa
+         43           5.0          3.5           1.6          0.6  setosa
+         44           5.1          3.8           1.9          0.4  setosa
+         45           4.8          3.0           1.4          0.3  setosa
+         46           5.1          3.8           1.6          0.2  setosa
+         47           4.6          3.2           1.4          0.2  setosa
+         48           5.3          3.7           1.5          0.2  setosa
+         49           5.0          3.3           1.4          0.2  setosa
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{versicolor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}     sepal\_length  sepal\_width  petal\_length  petal\_width     species
+         50           7.0          3.2           4.7          1.4  versicolor
+         51           6.4          3.2           4.5          1.5  versicolor
+         52           6.9          3.1           4.9          1.5  versicolor
+         53           5.5          2.3           4.0          1.3  versicolor
+         54           6.5          2.8           4.6          1.5  versicolor
+         55           5.7          2.8           4.5          1.3  versicolor
+         56           6.3          3.3           4.7          1.6  versicolor
+         57           4.9          2.4           3.3          1.0  versicolor
+         58           6.6          2.9           4.6          1.3  versicolor
+         59           5.2          2.7           3.9          1.4  versicolor
+         60           5.0          2.0           3.5          1.0  versicolor
+         61           5.9          3.0           4.2          1.5  versicolor
+         62           6.0          2.2           4.0          1.0  versicolor
+         63           6.1          2.9           4.7          1.4  versicolor
+         64           5.6          2.9           3.6          1.3  versicolor
+         65           6.7          3.1           4.4          1.4  versicolor
+         66           5.6          3.0           4.5          1.5  versicolor
+         67           5.8          2.7           4.1          1.0  versicolor
+         68           6.2          2.2           4.5          1.5  versicolor
+         69           5.6          2.5           3.9          1.1  versicolor
+         70           5.9          3.2           4.8          1.8  versicolor
+         71           6.1          2.8           4.0          1.3  versicolor
+         72           6.3          2.5           4.9          1.5  versicolor
+         73           6.1          2.8           4.7          1.2  versicolor
+         74           6.4          2.9           4.3          1.3  versicolor
+         75           6.6          3.0           4.4          1.4  versicolor
+         76           6.8          2.8           4.8          1.4  versicolor
+         77           6.7          3.0           5.0          1.7  versicolor
+         78           6.0          2.9           4.5          1.5  versicolor
+         79           5.7          2.6           3.5          1.0  versicolor
+         80           5.5          2.4           3.8          1.1  versicolor
+         81           5.5          2.4           3.7          1.0  versicolor
+         82           5.8          2.7           3.9          1.2  versicolor
+         83           6.0          2.7           5.1          1.6  versicolor
+         84           5.4          3.0           4.5          1.5  versicolor
+         85           6.0          3.4           4.5          1.6  versicolor
+         86           6.7          3.1           4.7          1.5  versicolor
+         87           6.3          2.3           4.4          1.3  versicolor
+         88           5.6          3.0           4.1          1.3  versicolor
+         89           5.5          2.5           4.0          1.3  versicolor
+         90           5.5          2.6           4.4          1.2  versicolor
+         91           6.1          3.0           4.6          1.4  versicolor
+         92           5.8          2.6           4.0          1.2  versicolor
+         93           5.0          2.3           3.3          1.0  versicolor
+         94           5.6          2.7           4.2          1.3  versicolor
+         95           5.7          3.0           4.2          1.2  versicolor
+         96           5.7          2.9           4.2          1.3  versicolor
+         97           6.2          2.9           4.3          1.3  versicolor
+         98           5.1          2.5           3.0          1.1  versicolor
+         99           5.7          2.8           4.1          1.3  versicolor
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{setosa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{x} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{virginica}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{x}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:}      sepal\_length  sepal\_width  petal\_length  petal\_width    species
+         100           6.3          3.3           6.0          2.5  virginica
+         101           5.8          2.7           5.1          1.9  virginica
+         102           7.1          3.0           5.9          2.1  virginica
+         103           6.3          2.9           5.6          1.8  virginica
+         104           6.5          3.0           5.8          2.2  virginica
+         105           7.6          3.0           6.6          2.1  virginica
+         106           4.9          2.5           4.5          1.7  virginica
+         107           7.3          2.9           6.3          1.8  virginica
+         108           6.7          2.5           5.8          1.8  virginica
+         109           7.2          3.6           6.1          2.5  virginica
+         110           6.5          3.2           5.1          2.0  virginica
+         111           6.4          2.7           5.3          1.9  virginica
+         112           6.8          3.0           5.5          2.1  virginica
+         113           5.7          2.5           5.0          2.0  virginica
+         114           5.8          2.8           5.1          2.4  virginica
+         115           6.4          3.2           5.3          2.3  virginica
+         116           6.5          3.0           5.5          1.8  virginica
+         117           7.7          3.8           6.7          2.2  virginica
+         118           7.7          2.6           6.9          2.3  virginica
+         119           6.0          2.2           5.0          1.5  virginica
+         120           6.9          3.2           5.7          2.3  virginica
+         121           5.6          2.8           4.9          2.0  virginica
+         122           7.7          2.8           6.7          2.0  virginica
+         123           6.3          2.7           4.9          1.8  virginica
+         124           6.7          3.3           5.7          2.1  virginica
+         125           7.2          3.2           6.0          1.8  virginica
+         126           6.2          2.8           4.8          1.8  virginica
+         127           6.1          3.0           4.9          1.8  virginica
+         128           6.4          2.8           5.6          2.1  virginica
+         129           7.2          3.0           5.8          1.6  virginica
+         130           7.4          2.8           6.1          1.9  virginica
+         131           7.9          3.8           6.4          2.0  virginica
+         132           6.4          2.8           5.6          2.2  virginica
+         133           6.3          2.8           5.1          1.5  virginica
+         134           6.1          2.6           5.6          1.4  virginica
+         135           7.7          3.0           6.1          2.3  virginica
+         136           6.3          3.4           5.6          2.4  virginica
+         137           6.4          3.1           5.5          1.8  virginica
+         138           6.0          3.0           4.8          1.8  virginica
+         139           6.9          3.1           5.4          2.1  virginica
+         140           6.7          3.1           5.6          2.4  virginica
+         141           6.9          3.1           5.1          2.3  virginica
+         142           5.8          2.7           5.1          1.9  virginica
+         143           6.8          3.2           5.9          2.3  virginica
+         144           6.7          3.3           5.7          2.5  virginica
+         145           6.7          3.0           5.2          2.3  virginica
+         146           6.3          2.5           5.0          1.9  virginica
+         147           6.5          3.0           5.2          2.0  virginica
+         148           6.2          3.4           5.4          2.3  virginica
+         149           5.9          3.0           5.1          1.8  virginica
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{x}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{51}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} sepal\_length           6.4
+         sepal\_width            3.2
+         petal\_length           4.5
+         petal\_width            1.5
+         species         versicolor
+         Name: 51, dtype: object
+\end{Verbatim}
+            
+    that returned the values in row \emph{labeled} 51. Using iloc to get the
+same result requires you to specify the \emph{position} of that row in
+the new dataframe, which is actually pos 1.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{x}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} sepal\_length           6.4
+         sepal\_width            3.2
+         petal\_length           4.5
+         petal\_width            1.5
+         species         versicolor
+         Name: 51, dtype: object
+\end{Verbatim}
+            
+    \subsection{Summary Statistics}\label{summary-statistics}
+
+    \paragraph{to take a quick look at a dataframe (maybe an imported CSV
+file) to see if it looks clean \& structured, its useful to use these
+'head', 'tail' and other
+commands.}\label{to-take-a-quick-look-at-a-dataframe-maybe-an-imported-csv-file-to-see-if-it-looks-clean-structured-its-useful-to-use-these-head-tail-and-other-commands.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}    sepal\_length  sepal\_width  petal\_length  petal\_width species
+         0           5.1          3.5           1.4          0.2  setosa
+         1           4.9          3.0           1.4          0.2  setosa
+         2           4.7          3.2           1.3          0.2  setosa
+         3           4.6          3.1           1.5          0.2  setosa
+         4           5.0          3.6           1.4          0.2  setosa
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{df}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:}      sepal\_length  sepal\_width  petal\_length  petal\_width    species
+         145           6.7          3.0           5.2          2.3  virginica
+         146           6.3          2.5           5.0          1.9  virginica
+         147           6.5          3.0           5.2          2.0  virginica
+         148           6.2          3.4           5.4          2.3  virginica
+         149           5.9          3.0           5.1          1.8  virginica
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:}        sepal\_length  sepal\_width  petal\_length  petal\_width
+         count    150.000000   150.000000    150.000000   150.000000
+         mean       5.843333     3.054000      3.758667     1.198667
+         std        0.828066     0.433594      1.764420     0.763161
+         min        4.300000     2.000000      1.000000     0.100000
+         25\%        5.100000     2.800000      1.600000     0.300000
+         50\%        5.800000     3.000000      4.350000     1.300000
+         75\%        6.400000     3.300000      5.100000     1.800000
+         max        7.900000     4.400000      6.900000     2.500000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{df}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} sepal\_length    5.843333
+         sepal\_width     3.054000
+         petal\_length    3.758667
+         petal\_width     1.198667
+         dtype: float64
+\end{Verbatim}
+            
+    \subsubsection{btw - the 50\% above is the 50th percentile = the median.
+So 50\% of the values are less than this
+datapoint.}\label{btw---the-50-above-is-the-50th-percentile-the-median.-so-50-of-the-values-are-less-than-this-datapoint.}
+
+    you may want to subtract the mean from all the values in order to
+'centre' (or "whiting") the dataset - then each value is delta from the
+mean
+
+    \subsubsection{PLOTS}\label{plots}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} <seaborn.axisgrid.PairGrid at 0x11bd0ab00>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_101_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Then, by adding the 'hue' command, you can distinguish the varieties of
+iris in the dataset by means of colour:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} <seaborn.axisgrid.PairGrid at 0x1a1e8eab38>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_103_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    .... that command returned histograms in the diagonal position.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{diag\PYZus{}kind}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} <seaborn.axisgrid.PairGrid at 0x1a1f9e76d8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_105_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    ... that command returned curves in the diagonal position.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
