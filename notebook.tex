@@ -1,0 +1,1139 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{numpy-random}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{The numpy.random package}\label{the-numpy.random-package}
+
+    \subsection{About Numpy.random}\label{about-numpy.random}
+
+The numpy.random package is a sub-package of the Numpy library{[}1{]}
+for the Python programming language. Numpy is used for dealing with
+multi-dimensional arrays of values and matrix operations in data
+analysis. While it's a powerful and widely used package, users seldom
+interact directly with it - it's typically accessed via one of the
+sub-packages such as numpy.random.
+
+    \subsubsection{It's Overall Purpose}\label{its-overall-purpose}
+
+The purpose of numpy.random is to provide users with a selection of
+methods by which pseudo random numbers can be generated for use in
+various applications. A typical application is in the creation of
+sampling plans.
+
+While its not currently possible for a computer to create truly random
+values, pseudo random numbers (derived from any method using
+computational algorithms) offer a useful simulation of actual random
+values. In theory, a higher degree of apparent randomness may
+characterise numbers generated from methods using electromagnetic
+atmospheric noise as a source input. {[}2{]} With the advent of `quantum
+computing' perhaps it may finally become possible to generate truly
+random values.
+
+    \subsubsection{Who needs random
+numbers?}\label{who-needs-random-numbers}
+
+Aside from their frequent use in sampling and simulations, one
+real-world application for pseudo random numbers which I have personally
+encountered is in the online gaming industry. In this case, a stream of
+pseudo random numbers is accessed by connected gaming terminals in
+bookmakers shops, pubs etc to produce results in so-called ``games of
+chance'', where the user's skills have no influence on the result. As a
+mission critical component in the network, the random number generator
+(RNG) runs 24x7 for 365 days a year, and any interruption of service is
+flagged by loud alarms in the HQ where the operations team quickly work
+to restore service!
+
+    \subsubsection{Sampling Methods}\label{sampling-methods}
+
+Sampling Methods can be classified into one of two categories:{[}3{]}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Probability Sampling: The sample has a known probability of being
+  selected. All of the distributions illustrated here are examples of
+  probability sampling.These techniques are more likely to yield a
+  sample which is representative of the whole population, to within a
+  calculated margin of error.
+\item
+  Non-probability Sampling: The sample does not have a known probability
+  of being selected. In contrast with probability sampling, a
+  non-probability sample is not a product of a randomized selection
+  processes. Subjects in a non-probability sample are usually selected
+  on the basis of their accessibility or by the personal judgment of the
+  researcher. {[}4{]} Such techniques are unlikely to yield a sample
+  which is representative of the whole population.
+\end{enumerate}
+
+    \subsection{The use of the Simple Random Data
+functions}\label{the-use-of-the-simple-random-data-functions}
+
+The ``Simple random data'' functions{[}5{]} in numpy.random provide a
+range of methods for creating random values in a variety of arrays,
+formats and structures, depending on the specific needs of the user.
+This is a good starting point for devising a basic sampling plan.
+
+    \subsubsection{Using numpy.random.rand}\label{using-numpy.random.rand}
+
+Simple random data functions in numpy.random begin with
+numpy.random.rand {[}6{]}, which allows you to create an array of a
+given shape and populate it with random floating values of a uniform
+distribution, from 0 to 0.99999999. For example, here's an array of 3
+sets of sample values, of 4 rows and 3 columns each, generated by
+np.random.rand
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} array([[[0.11584083, 0.55780048, 0.3026395 ],
+                [0.57788441, 0.33343881, 0.7080655 ],
+                [0.54672904, 0.02515292, 0.8476291 ],
+                [0.05932114, 0.58897054, 0.72657292]],
+        
+               [[0.44632679, 0.56866086, 0.72533905],
+                [0.91064284, 0.95655994, 0.44072363],
+                [0.65832166, 0.14270782, 0.83314889],
+                [0.21844577, 0.12785032, 0.07137863]],
+        
+               [[0.13937665, 0.77280845, 0.90166358],
+                [0.20372351, 0.99773058, 0.64093209],
+                [0.40834524, 0.6813582 , 0.73770539],
+                [0.37416201, 0.02857268, 0.12634336]]])
+\end{Verbatim}
+            
+    Even in such small sample sizes, each of these values is almost as
+likely to appear in the array as any other, as it's a uniform
+distribution.
+
+    \subsubsection{Using numpy.random.int}\label{using-numpy.random.int}
+
+    Another simple random data function is numpy.random.int {[}7{]}, which
+can create an array of integers between defined low \& high limits, from
+the ``discrete uniform'' distribution in the closed interval {[}low,
+high{]}. For example, to create an array of 10 integers, greater than 0
+and less than or equal to 100 :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} array([69, 70, 10, 53, 71, 96, 20, 33, 94, 80])
+\end{Verbatim}
+            
+    \subsection{Permutations}\label{permutations}
+
+The ``Permutation'' functions offer a range of methods for randomising
+the arrangement (or order) of a defined sequence of values. This could
+be a good starting point for a programmer creating a music shuffle
+function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    Here is an example of a permutation function using the shuffle command,
+starting with an initial array:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{arr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14])
+\end{Verbatim}
+            
+    Here it is, randomly shuffled:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{arr}\PY{p}{)}
+        \PY{n}{arr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} array([10, 11,  4,  0,  5,  1,  8,  6,  2, 13,  3, 14,  7,  9, 12])
+\end{Verbatim}
+            
+    Incidently, how many permutations are possible in this example? How many
+unique ways could you arrange 15 books on a shelf? The answer is
+15\emph{14}13\emph{12}11\emph{10}9\emph{8}7\emph{6}5\emph{4}3\emph{2}1
+or "factorial 15", expressed as 15! - and the number of permutations is
+1.3076744e+12 .... or 1,307,674,368,000
+
+    \subsection{About Probability
+Distributions}\label{about-probability-distributions}
+
+    A~probability distribution~is a mathematical function that provides the
+probabilities of occurrence of different possible outcomes in
+an~experiment.{[}8{]} The concept of the probability distribution and
+the random variables which they describe underlies the mathematical
+discipline of probability theory, and the science of statistics. There
+is spread or variability in almost any value that can be measured in a
+population (e.g. height of people, durability of a metal, sales growth,
+traffic flow, etc.).
+
+Examples of Probability distributions include the following:
+
+    \subsubsection{1. Uniform Distribution}\label{uniform-distribution}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    Lets generate 30,000 random values of between 0 and 0.99999999
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{30000}\PY{p}{)}
+        \PY{n}{x}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} array([0.98139379, 0.43907742, 0.98257735, {\ldots}, 0.32088705, 0.27276816,
+               0.51148256])
+\end{Verbatim}
+            
+    To illustrate the distribution of the random values generated by the
+np.random.rand function, we can use it to generate a sample of values
+and then plot them using the matplotlib function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Plot the distribution of these values in a histogram}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} (array([3020., 2985., 3066., 2885., 3089., 3019., 2903., 2941., 2957.,
+                3135.]),
+         array([1.77919018e-05, 1.00013680e-01, 2.00009567e-01, 3.00005455e-01,
+                4.00001343e-01, 4.99997231e-01, 5.99993119e-01, 6.99989006e-01,
+                7.99984894e-01, 8.99980782e-01, 9.99976670e-01]),
+         <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    That's what a randomly generated, essentially uniform distribution looks
+like. It's uniform insofaras every value in the range defined had an
+equal chance of being picked. We see approx 3,000 appearances of each
+value.
+
+Another function which generates a uniform distribution is
+np.random.uniform :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} randomly generate 1000 values from \PYZgt{}\PYZhy{}10 to \PYZlt{}\PYZhy{}9}
+         \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+
+    the np.random.uniform function seems to show a quite different looking
+distribution for this 1000 unit sample, but the larger the sample size
+the more uniform it looks.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} (array([ 96.,  96.,  89., 103., 109., 108., 108.,  90., 103.,  98.]),
+          array([-9.99994761, -9.90000568, -9.80006375, -9.70012182, -9.60017989,
+                 -9.50023796, -9.40029603, -9.3003541 , -9.20041217, -9.10047024,
+                 -9.00052831]),
+          <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{2. Normal Distribution}\label{normal-distribution}
+
+    A Normal (or Gaussian) distribution is related to real-valued quantities
+that grow linearly (e.g. errors, offsets). Its the most common
+continuous distribution. We can use the 'numpy.random.normal' function
+which generates a normal distribution looking more like the classic
+'bell curve'.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} randomly generate 1000 values, normally distributed with a mean of 0, in increments of 0.1}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} plot the distribution}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} (array([  4.,  18.,  69., 186., 216., 234., 164.,  78.,  27.,   4.]),
+          array([-0.30954091, -0.24816988, -0.18679886, -0.12542783, -0.06405681,
+                 -0.00268578,  0.05868525,  0.12005627,  0.1814273 ,  0.24279833,
+                  0.30416935]),
+          <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This Normal distribution shows observations clustered around the Mean
+value of zero. The chances of values close to zero being picked are
+greater than for those at the extremities of the distribution. Typically
+95\% of all observations in a Normal distribution fall within +/- 2
+Standard Deviations from the Mean.
+
+    Notice that its the 1st digit in np.random.normal (0,0.1,10000) which
+defines the MEAN in this distribution - in this case 0. You can make it
+any value you choose. Equally, the 2nd digit defines the intervals in
+the range.
+
+    \subsubsection{3. Pareto Distribution}\label{pareto-distribution}
+
+    The Pareto distribution seeks to describe quantities which have a
+particular property: namely, that a few items account for a lot of it
+and a lot of items account for a little of it.
+
+For example, if we think of wealth distribition, a small fraction of the
+people (the few richest ones) tend to account for a large fraction of
+total income, and a large fraction of the people tend to account for a
+small fraction of total income.{[}9{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Use the pareto function to draw samples from the distribution:}
+         \PY{n}{a}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mf}{3.}  \PY{c+c1}{\PYZsh{} shape and mode}
+         \PY{n}{s} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{pareto}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{7}\PY{p}{)} \PY{o}{*} \PY{n}{m}
+         
+         \PY{c+c1}{\PYZsh{} Display the histogram of the samples, along with the probability density function:}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{n}{count}\PY{p}{,} \PY{n}{bins}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{normed}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{fit} \PY{o}{=} \PY{n}{a}\PY{o}{*}\PY{n}{m}\PY{o}{*}\PY{o}{*}\PY{n}{a} \PY{o}{/} \PY{n}{bins}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{a}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{bins}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{count}\PY{p}{)}\PY{o}{*}\PY{n}{fit}\PY{o}{/}\PY{n+nb}{max}\PY{p}{(}\PY{n}{fit}\PY{p}{)}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Money (m)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Probability P(m)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show} \PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/matplotlib/axes/\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This pareto distribution illustrates the probabilty of a given
+individual securing a given share of the wealth in a country (Money(m))
+- It shows that its far more probable they will secure a small share,
+than it is likely they will get a large share.
+
+    \subsubsection{4. Binomial Distribution}\label{binomial-distribution}
+
+    The binomial distribution model is an important probability model that
+is used when there are two possible outcomes (hence "binomial").
+{[}10{]}
+
+For example, adults who suffer a myocardial infarction might survive the
+heart attack or not, a medical device such as a coronary stent might be
+successfully implanted or not. These are some examples of applications
+or processes in which the outcome of interest has two possible values
+(i.e., it is dichotomous). The two outcomes are often labeled "success"
+and "failure" with success indicating the presence of the outcome of
+interest.
+
+The binomial distribution model allows us to compute the probability of
+observing a specified number of "successes" when the process is repeated
+a specific number of times and the outcome for a given patient is either
+a success or a failure.
+
+Use of the binomial distribution requires three assumptions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Each replication of the process results in one of two possible
+  outcomes (success or failure),
+\item
+  The probability of success is the same for each replication, and
+\item
+  The replications are independent. A success in one patient does not
+  influence the probability of success in another.
+\end{enumerate}
+
+The numpy.random.binomial function is used here to illustrate the
+distribution. {[}11{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} plot the histogram where the number of trials = 10, }
+         \PY{c+c1}{\PYZsh{} the probability of each trial = 50\PYZpc{}, tested 1000 times.}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} (array([  2.,  12.,  46.,  91., 220., 246., 217., 122.,  34.,  10.]),
+          array([ 0.,  1.,  2.,  3.,  4.,  5.,  6.,  7.,  8.,  9., 10.]),
+          <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    So, when tested 1,000 times, 5 out of 10 trials conducted gave a
+successful result on 250 occasions.
+
+    \subsubsection{5. Exponential
+Distribution}\label{exponential-distribution}
+
+    The exponential distribution can be used to model the time between
+events in a continuous Poisson process. It is assumed that independent
+events occur at a constant rate. {[}12{]}
+
+This distribution has a wide range of applications, including
+reliability analysis of products and systems, queuing theory, and Markov
+chains. For example, the exponential distribution can be used to model:
+
+\begin{itemize}
+\tightlist
+\item
+  How long it takes for electronic components to fail
+\item
+  The time interval between customers' arrivals at a terminal
+\item
+  Service time for customers waiting in line
+\item
+  The time until default on a payment (credit risk modeling)
+\item
+  Time until a radioactive nucleus decays
+\end{itemize}
+
+    Lets take an example - arrival times to a bank counter are modeled by a
+poisson process with a rate of 30 customers per hour (expressed as 0.5
+per minute). Using the random.exponential function we can calculate the
+probability of any given arrival rate per minute occuring. {[}12{]}
+{[}13{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{exponential}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Arrival Rate per minute (x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Probability P(x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} divide P(x) by 1000 to find the probability rate out of 1.}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    this shows the highest probable arrival rate is 0.5 per minute or less.
+
+    \subsection{Using Seeds in Random Number Generation
+(RNG)}\label{using-seeds-in-random-number-generation-rng}
+
+    To initiate a random number sequence a 'seed' value is required.
+Typically this could be the timestamp, down to the microsecond, from the
+processor when the RNG program starts. But the seed could be generated
+from any random source - eg. the temperature of the processor, or a
+number found somewhere in the decimal expansion of the value for Pi.
+
+The seed is critical to the security of a random number sequence. As
+long as it's unknown to any program trying to 'crack' it, it's virtually
+impossible to guess what the sequence will be. Equally, if the seed is
+known, and tests are run with enough RNG algorithms, then the "random"
+sequence will be discovered - a useful reminder that the sequence
+generated is only "pseudo random". Using a given seed and a given
+algoritm, the same number sequence will be generated every time.
+
+The numpy.random library includes four functions which can be used in
+random number generation, examples of which now follow. {[}14{]}
+{[}15{]}
+
+    \subsubsection{1.
+Numpy.random.RandomState}\label{numpy.random.randomstate}
+
+    RandomState exposes a number of methods for generating random numbers
+drawn from a variety of probability distributions. The command
+np.random.RandomState(seed=None) constructs a random number generator.
+If seed is None, then RandomState will try to read data from
+/dev/urandom (or the Windows analogue) if available or seed from the
+clock otherwise.
+
+Lets create the RNG and call a random sequence of 5 numbers:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{rng} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{RandomState}\PY{p}{(}\PY{n}{seed} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{rng}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} array([-0.26021416, -1.16314182,  0.18769508,  0.49223594,  1.31144861])
+\end{Verbatim}
+            
+    now run it again, with identical calls:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{rng2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{RandomState}\PY{p}{(}\PY{n}{seed} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{rng2}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} array([-1.1232367 ,  1.1895772 ,  0.36698392, -0.07879   , -1.17062428])
+\end{Verbatim}
+            
+    It returned a different number sequence as (seed = None). What if we
+define the seed ?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{rng} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{RandomState}\PY{p}{(}\PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{123}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{rng}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} array([-1.0856306 ,  0.99734545,  0.2829785 , -1.50629471, -0.57860025])
+\end{Verbatim}
+            
+    run the RNG again, with the same seed, and we get the same array of
+values:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{rng3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{RandomState}\PY{p}{(}\PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{123}\PY{p}{)}
+         \PY{n}{rng3}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} array([-1.0856306 ,  0.99734545,  0.2829785 , -1.50629471, -0.57860025])
+\end{Verbatim}
+            
+    \subsubsection{2. numpy.random.seed}\label{numpy.random.seed}
+
+This method is called when RandomState is initialized (see above). It
+can be called again to re-seed the generator. You can also use it to
+manually set the seed for randint to generate random numbers.
+
+For example, you could set the seed to 5678 and then ask randint to
+return a random integer within a defined range, as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{5678}\PY{p}{)}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 24
+\end{Verbatim}
+            
+    \subsubsection{3.
+Numpy.random.get\_state()}\label{numpy.random.get_state}
+
+This command returns a tuple representing the internal state of the
+generator. A tuple is a sequence of values, like a list, except that
+tuples are immutable. The tuple returned by get\_state can be used much
+like a seed in order to create reproducible sequences of random numbers
+{[}16{]}
+
+The returned tuple has the following items: * the string `MT19937'. * a
+1-D array of 624 unsigned integer keys. * an integer pos. * an integer
+has\_gauss. * a float cached\_gaussian.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{get\PYZus{}state}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} ('MT19937', array([2817670114, 1962497881,  914027948, 1463440343, 1938887794,
+                 1092405273, 2726328503, 2343148856,  741258043,  273416092,
+                 2344723317,  193056740, 3743633300,  957678078, 3876900885,
+                 2760083594, 1938161523, 2216869175, 2220072100, 2931112756,
+                 1806881730, 2710473768, 2704375294, 3428424545, 2101762119,
+                  160709904, 1056457662, 1569491757,  101953039, 1117059617,
+                 3810068043, 2107176353, 3128530458,  162517664, 1413004986,
+                  134885877, 1866579287,  243054771, 3354272377, 3316485039,
+                  766475017, 2886663670, 3827112345, 4015725661, 4012480437,
+                 1956829835, 1854065995,  427733846,  798972448, 1127767341,
+                 3551560354,  972061951,  511129661, 4186138517, 2219638225,
+                  791231207, 1996538239, 1598374079, 3179020503,  778160734,
+                  225435774, 4097810135,  912937395,  480971914,  247785298,
+                 3532107327,  186534415, 2564184188,  739276050,  249105914,
+                  871771753, 1590879840, 3014046134, 2979433626, 1293579635,
+                 4028707217, 2340572346, 3834325024,  559537776, 3562682152,
+                 2397833977,  128404693,   45140422, 3102295860, 3598054190,
+                 2538654404, 3073457860, 1738655095, 2163176771, 3975366148,
+                 1789614528, 3517548346, 1678102157,   55323005, 2982654071,
+                 3399073617, 2615081231,  219102024, 1751353693,  518525543,
+                 2171388466, 3509763601,  678451266, 2886384566, 4062643214,
+                 3155917445,   22394711, 2048491440, 3358654631,  778478602,
+                  897927217, 3800224196,  734761967, 2154344267, 3164245220,
+                 3634430628, 3672126852,  868243820, 3788726784, 1831562131,
+                 3414628976, 1889055133, 2748708602, 1160134254,  683947598,
+                 2011760320, 3943791367,  954291000, 3964462072, 4238150832,
+                 1794304324,  351768995, 2427755322, 1992394311, 1173798343,
+                 2912448822,   51540805, 2905420917, 2227016134, 2276595563,
+                 3089372840, 3360648235, 2225397815, 1730476677, 2472464821,
+                 3749991048, 2587793748,  671082553, 2603864753, 1354625044,
+                 1003964990, 2217853131, 3509112685, 3724421683, 1218812061,
+                 1015520667, 2008755200, 2689373480, 1910614172,   40171864,
+                  226981426, 2074595458, 3610746404, 3449269644, 1783495033,
+                 3970438649, 2530219921, 4167451715, 2830960449, 3667835074,
+                 2656553762, 3049437587,  506510971, 1802724059, 3205445418,
+                  120774861,  285481882, 1289715544, 3464318015, 4058957503,
+                 2737261791, 3787497035, 2856298761, 1530200346,  592558550,
+                 2692524434, 1036326026, 4200933164, 3431508851, 3669262824,
+                  939015566,  246584935,  334237931,  800439876, 2984276990,
+                 1088093126,  280357961, 2467022602, 1291680772, 1354871913,
+                  559833127, 3767532335,  905451115, 3080218601, 1797900461,
+                 3473867913, 3604355709, 1083510274,  371110119, 1652556421,
+                 3358075494, 1337830822, 1318416414,  172067910,  991239634,
+                 3663618079,  927449845, 3359964920, 1709337624,  878998975,
+                 1289056074,  756311813,  689254267, 3849718506, 3992287769,
+                 1108889383, 1167567983, 4186616415, 3063288856, 3419258003,
+                 3752105691, 3265956040, 3183116078, 3787696341, 1482301283,
+                 3287081797, 2313455544, 1800456801, 3914299410, 3190715604,
+                 1722674990, 3831978140, 1909890676, 3242833565,  927106087,
+                 2180299394, 1523607349,  629676213,  550750616, 1451145908,
+                 1997717752, 1775767899, 3284324384, 4092969334, 1811111016,
+                 3969386966, 2494013373,  278695081, 3575503596, 3057287430,
+                 3406217612, 3155426250, 3496905987, 3473706987, 2291950847,
+                 1949357200, 1496556195, 4225375428, 2286861477, 1317166270,
+                 1896771549, 1091147743, 3611033253, 1815704021, 3358425549,
+                 2351391983, 3694031144,  985524441, 3391904900, 1774151320,
+                 2159130726, 1707666615, 3895381021, 3079128276, 1186476218,
+                 3010387807, 2493547446,  887169597, 3508460133, 3786296206,
+                 1489020761, 1726532414, 3031764857, 2200117555, 4140510988,
+                 3921582102, 1510964147, 1779899540, 2833231038, 2978716237,
+                  145134040, 1267397115, 1149277041, 3987418548, 2151300886,
+                 2811673910, 2372185964, 4127066666, 1139488498,  674027832,
+                 3981359069, 3086206730, 2307477831, 3482440227,  154376057,
+                 1878452647, 1794437182, 4266058677, 2741697267, 2531332968,
+                 3776721477, 3900987432,   36172857,  926763607, 2202740850,
+                 4082352684,    1653915, 3445304647, 1632638979,  282717380,
+                 3057061760, 3010301271, 1648591364, 2845943783, 3265166365,
+                 3974548997,  357325135, 3035326074, 3857405956,    5278341,
+                 2497456484, 3872588341, 1367572571,  898412600, 2769871368,
+                  732904734,  681539507, 2676283587, 3590495503, 2940344042,
+                 2539982549, 3230334122, 2569860493, 3845369932, 3630378244,
+                 3304913081, 3159279893, 1093119624, 1071568193,   82497397,
+                 1330414704, 2763032493, 1320406096,  489232630,  467455487,
+                 3059154310, 3089214913,  234603019, 1415765328,  458653687,
+                  753242311, 3081039729, 2487002286, 3506070602, 2148119415,
+                 3098106688,  736121099, 2614695755,  833146587, 2769701225,
+                 2473883737,  792682347, 1784628606, 1851264025,  373042794,
+                 1950298670, 2669020028, 3853968123, 3873071917,  354661617,
+                 3902163172, 3390744280,  803066361, 1757874243,  485459997,
+                 3750467591, 3324619477, 2715728376, 3899715954,  340694262,
+                 4229754221, 1736570486,  642796006, 3131649334, 2156446275,
+                 1145826097, 3944203596, 4192099737,  599522907, 1009514492,
+                 2017277704, 3522120950,  824970276, 4275928028, 3110508806,
+                 2229576116,  879888345, 1069233977, 3784476199, 2074213827,
+                 2004482550, 3845940876, 2242267435, 3521622579, 3776870193,
+                 2290260658, 1291303324, 1093236285, 4060519652, 1388256226,
+                 2442201726, 3092922314, 2601981441, 3891528444, 1871607667,
+                 3740376708,  788760987, 4160936919, 1973318853, 2293644281,
+                 2082465866, 2600601414,  418585295, 2679699025, 2124830274,
+                 1355727264, 1372529968, 3716008808, 1180602362, 3626893421,
+                 1528899099, 3447342865,  796386309, 2332170708, 3709851733,
+                 1251858986,  319056972,  689572088, 1900764742, 3753660760,
+                 3746097394, 2952840491,  407635855,  789780868, 2645166252,
+                 3380599825, 4213831858, 1112216582, 2949354838,  671959926,
+                 1535515383, 2292957951, 1560628503, 2353651420, 1227083750,
+                 2324389144, 4225252098, 1343975588, 1197704373,  738308882,
+                 1353843672,  223693641, 3377104767, 1521146510, 1642605967,
+                  860050235, 1072953538, 2027610398, 1278398949, 3112343049,
+                 3236185457, 2514894151, 3059745724, 3206043743,  139779706,
+                 3534634109, 4075061841, 1039064211, 2546213156,  674804031,
+                 2885868484,   17437002, 4085075236,  341810583,  692682582,
+                 4154986476, 1510748960, 1628082196, 3632959063, 3354355399,
+                 2723615584,  645908691, 3772690916, 2388279422, 3217347595,
+                 1361320475, 2552340315, 2814125791, 2890394458,  286084571,
+                 1322489372,  880181023, 2987438991,  675082317, 2082599547,
+                 2932637932,  503674355, 1325961264, 2458465233, 2989527121,
+                 1485366991, 2213852072, 1234612876, 2982625160, 3836737944,
+                  491767641, 2905650532, 1267984236,   25501094, 2574637610,
+                  749382742, 1938070271, 1389639687, 3249756419, 1551071824,
+                 2444080128, 2188109259, 3663312932, 2963596685, 1808032510,
+                  751995678, 2857204627, 2698411787, 2048904072, 3621406208,
+                 2067352346, 2472834792,  186744311, 2123039564, 3854458821,
+                 4256681441, 3676403562,  139842173,  575481010, 3271635011,
+                 1774756753,   37330565, 2952055928, 3847563246, 1253024735,
+                 2894309590,  728893682,  247275124, 2324873167,   27311218,
+                  610390349, 1380221081, 3228030647, 1159437758, 1146806740,
+                 3968062719, 2302398553,  683833865, 4096658847, 4144921537,
+                  964333074, 2334002254, 3936007779,  115667152, 1366145601,
+                 3728903518, 4273196616,  882523241,   38666453, 2413696916,
+                 4088501651, 3406145203, 3626039687, 2018653487,  165529522,
+                 3122612003,  524152036, 2610463132, 3425863109,  385626999,
+                 2386657396, 1433675122, 2480768733, 4225660701, 3710485553,
+                 3939001287, 3298713169, 1407767031,  940603425, 1945276249,
+                 1066422304,  245931312, 3473968062, 2720869655, 4273229064,
+                  646927159, 1801403261, 2381048872, 2513483556], dtype=uint32), 2, 0, 0.0)
+\end{Verbatim}
+            
+    \subsubsection{4. numpy.random.set\_state}\label{numpy.random.set_state}
+
+    This command sets the internal state of the generator from a tuple (of
+the same parameters as that generated by the numpy.random.get\_state()
+command (above). It can be used if needed to manually (re-)set the
+internal state of the ``Mersenne Twister''{[}R523523{]} pseudo-random
+number generating algorithm. {[}17{]}
+
+The command is: numpy.random.set\_state(state) where state : tuple(str,
+ndarray of 624 uints, int, int, float)
+
+    \paragraph{The random.uniform
+function}\label{the-random.uniform-function}
+
+A range of probability distributions is available to use within the
+RandomState function. For a uniform distribution, in which every value
+in the range defined has an equal chance of being picked, we can use the
+numpy.random.uniform function:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} The sample size is 1000 and all values are within the given interval of \PYZgt{}= \PYZhy{}1 and \PYZlt{}99.}
+         \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{99}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} (array([107., 109.,  89., 103.,  89., 105.,  99.,  87., 109., 103.]),
+          array([-0.9939068 ,  9.00425749, 19.00242177, 29.00058605, 38.99875034,
+                 48.99691462, 58.99507891, 68.99324319, 78.99140748, 88.98957176,
+                 98.98773604]),
+          <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_73_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{The random.poisson
+function}\label{the-random.poisson-function}
+
+    The Poisson distribution is specified by one parameter: lambda (λ). This
+parameter equals the mean and variance. As lambda increases to
+sufficiently large values, the normal distribution (λ, λ) may be used to
+approximate the Poisson distribution. {[}18{]}
+
+The Poisson distribution can be used to describe the number of times an
+event occurs in a finite observation space. For example, a Poisson
+distribution can describe the number of defects in the mechanical system
+of an airplane or the number of calls to a call center in an hour. The
+Poisson distribution is often used in quality control,
+reliability/survival studies, and insurance. A variable follows a
+Poisson distribution if the following conditions are met:
+
+\begin{itemize}
+\tightlist
+\item
+  Data are counts of events (nonnegative integers with no upper bound).
+\item
+  All events are independent.
+\item
+  Average rate does not change over the period of interest.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} generate two random samples of 100 values each, using a poision distribution with lamdas }
+         \PY{c+c1}{\PYZsh{} of 10 and 3.}
+         \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{poisson}\PY{p}{(}\PY{n}{lam}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} ([array([ 0.,  1.,  9., 22., 19., 29., 12.,  6.,  1.,  1.]),
+           array([41., 39., 20.,  0.,  0.,  0.,  0.,  0.,  0.,  0.])],
+          array([ 0. ,  2.1,  4.2,  6.3,  8.4, 10.5, 12.6, 14.7, 16.8, 18.9, 21. ]),
+          <a list of 2 Lists of Patches objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_76_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{References}\label{references}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  http://www.numpy.org/
+\item
+  https://en.wikipedia.org/wiki/Random\_number\_generation
+\item
+  https://onlinecourses.science.psu.edu/stat100/node/18/
+\item
+  https://explorable.com/non-probability-sampling
+\item
+  https://docs.scipy.org/doc/numpy-1.14.1/reference/routines.random.html\#
+\item
+  (https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.random.rand.html\#numpy.random.rand)
+\item
+  (https://docs.scipy.org/doc/numpy-1.14.1/reference/generated/numpy.random.randint.html\#numpy.random.randint)
+\item
+  (https://en.wikipedia.org/wiki/Probability\_distribution\#Applications)
+\item
+  https://math.stackexchange.com/questions/24204/understanding-the-pareto-distribution-as-applied-to-wealth
+\item
+  http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704\_Probability/BS704\_Probability7.html
+\item
+  https://docs.scipy.org/doc/numpy-1.14.1/reference/generated/numpy.random.binomial.html\#numpy.random.binomial
+\item
+  https://support.minitab.com/en-us/minitab-express/1/help-and-how-to/basic-statistics/probability-distributions/supporting-topics/distributions/exponential-distribution/
+\item
+  https://en.wikipedia.org/wiki/Exponential\_distribution
+  https://www.youtube.com/watch?v=4PEX-SuftjQ
+\item
+  https://www.quora.com/What-is-seed-in-random-number-generation
+\item
+  https://stackoverflow.com/questions/22994423/difference-between-np-random-seed-and-np-random-randomstate
+\item
+  https://docs.scipy.org/doc/numpy-1.14.1/reference/generated/numpy.random.get\_state.html\#numpy.random.get\_state
+\item
+  https://docs.scipy.org/doc/numpy-1.14.1/reference/generated/numpy.random.set\_state.html\#numpy.random.set\_state
+\item
+  https://support.minitab.com/en-us/minitab-express/1/help-and-how-to/basic-statistics/probability-distributions/supporting-topics/distributions/poisson-distribution/
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
